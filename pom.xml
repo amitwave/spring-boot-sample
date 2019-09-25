@@ -54,6 +54,7 @@
     <properties>
         <java.version>1.8</java.version>
         <start-class>hello.Application</start-class>
+        <docker.image.prefix>wave</docker.image.prefix>
     </properties>
 
 
@@ -70,14 +71,14 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <classifier>spring-boot</classifier>
+                            <!--<classifier>spring-boot</classifier>-->
                             <mainClass>${start-class}</mainClass>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <plugin>
+          <!--  <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.26.0</version>
@@ -112,7 +113,7 @@
                                     <port>8080:8080</port>
                                 </ports>
                                 <wait>
-                                    <!-- Check for this URL to return a 200 return code .... -->
+                                    &lt;!&ndash; Check for this URL to return a 200 return code .... &ndash;&gt;
                                     <url>http://localhost:8080/wizard</url>
                                     <time>120000</time>
                                 </wait>
@@ -121,6 +122,61 @@
 
                     </images>
                 </configuration>
+            </plugin>-->
+
+<!--
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.9</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                </configuration>
+            </plugin>
+-->
+
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.9
+                </version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
