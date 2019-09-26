@@ -71,90 +71,19 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <!--<classifier>spring-boot</classifier>-->
+                            <classifier>spring-boot</classifier>
                             <mainClass>${start-class}</mainClass>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-          <!--  <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.26.0</version>
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
 
 
-                <configuration>
-                    <images>
-                        <image>
-                            <name>docker.io/kkapelon/docker-maven-comparison</name>
-                            <build>
-                                <dockerFile>${project.basedir}/Dockerfile</dockerFile >
-                            </build>
-                            <run>
-                                <ports>
-                                    <port>8080:8080</port>
-                                </ports>
-                                <wait>
-                                    &lt;!&ndash; Check for this URL to return a 200 return code .... &ndash;&gt;
-                                    <url>http://localhost:8080/wizard</url>
-                                    <time>120000</time>
-                                </wait>
-                            </run>
-                        </image>
-
-                    </images>
-                </configuration>
-            </plugin>-->
 
 <!--
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.9</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                </configuration>
-            </plugin>
+
 -->
-
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.9
-                </version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                </configuration>
-
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -181,5 +110,116 @@
         </plugins>
     </build>
 
+
+    <profiles>
+        <profile>
+            <id>spotify</id>
+            <!--<activation>
+                &lt;!&ndash; this profile is active by default &ndash;&gt;
+                <activeByDefault>true</activeByDefault>
+
+            </activation>-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.9
+                        </version>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                        </configuration>
+
+                    </plugin>
+                </plugins>
+
+
+
+            </build>
+
+        </profile>
+
+
+        <profile>
+            <id>fabric8</id>
+
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>0.26.0</version>
+
+
+
+                        <!--  <executions>
+                              <execution>
+                                  <id>start</id>
+                                  <phase>pre-integration-test</phase>
+                                  <goals>
+                                      <goal>build</goal>
+                                      <goal>start</goal>
+                                  </goals>
+                              </execution>
+                              <execution>
+                                  <id>stop</id>
+                                  <phase>post-integration-test</phase>
+                                  <goals>
+                                      <goal>stop</goal>
+                                  </goals>
+                              </execution>
+                          </executions>-->
+
+
+                        <configuration>
+                            <!--<dockerHost>http://192.168.65.0:2375</dockerHost>-->
+                            <verbose>true</verbose>
+                            <images>
+                                <image>
+                                    <name>${docker.image.prefix}/${project.artifactId}-fabric8</name>
+                                    <build>
+                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile >
+                                        <assembly>
+                                            <descriptorRef>artifact</descriptorRef>
+                                        </assembly>
+                                    </build>
+                                    <!--<run>
+                                        <ports>
+                                            <port>8080:8080</port>
+                                        </ports>
+                                        <wait>
+                                            &lt;!&ndash; Check for this URL to return a 200 return code .... &ndash;&gt;
+                                            <url>http://localhost:8080/wave/health-check</url>
+                                            <time>120000</time>
+                                        </wait>
+                                    </run>-->
+                                </image>
+
+                            </images>
+                        </configuration>
+                    </plugin>
+
+
+
+
+                </plugins>
+
+
+
+            </build>
+
+        </profile>
+
+    </profiles>
 
 </project>
