@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-example
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: rest-example
+  template:
+    metadata:
+      labels:
+        app: rest-example
+        tier: backend
+    spec:
+      containers:
+      - name: rest-example
+        image: wave/spring-boot-fabric8:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        ports:
+        - containerPort: 8080
