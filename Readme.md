@@ -29,26 +29,27 @@
 
 
 
-docker login docker.io
+* docker login docker.io
 
-docker tag  cb428c95f2dd $DOCKER_HUB_USER/rest-example
+* docker tag  cb428c95f2dd $DOCKER_HUB_USER/rest-example
 
-eval $(minikube docker-env)
-docker tag  0232504d32e5 $DOCKER_HUB_USER/wave/spring-boot-fabric8
+* eval $(minikube docker-env)
+* docker tag  0232504d32e5 $DOCKER_HUB_USER/wave/spring-boot-fabric8
 
--- setup kubernetes
--- create services.yml
-    kubectl create -f kubernetes/services.yml
--- see all services
-    kubectl get services --all-namespaces
-
-
--- create deployment:
-kubectl create -f kubernetes/deployment.yml
-
--- get the port number - the value of NodePort
-kubectl describe service rest-example
+* -- setup kubernetes
+* -- create services.yml
+    ```kubectl create -f kubernetes/services.yml```
+* -- see all services
+    ```kubectl get services --all-namespaces```
 
 
-minikube service rest-example --url
+* -- create deployment:
+```kubectl create -f kubernetes/deployment.yml```
+
+* -- get the port number - the value of NodePort
+```kubectl describe service rest-example```
+
+
+* Get the url of the service
+```minikube service rest-example --url```
 
