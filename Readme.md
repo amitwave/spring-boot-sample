@@ -36,7 +36,7 @@
 * eval $(minikube docker-env)
 * docker tag  0232504d32e5 $DOCKER_HUB_USER/wave/spring-boot-fabric8
 
-* -- setup kubernetes
+* -- Setup kubernetes - following steps will help doing that
 * -- create services.yml
     ```kubectl create -f kubernetes/services.yml```
 * -- see all services
