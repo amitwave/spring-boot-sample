@@ -46,6 +46,8 @@ docker tag  0232504d32e5 $DOCKER_HUB_USER/wave/spring-boot-fabric8
 -- create deployment:
 kubectl create -f kubernetes/deployment.yml
 
+-- get the port number - the value of NodePort
+kubectl describe service rest-example
 
 
 minikube service rest-example --url
