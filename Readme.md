@@ -1,16 +1,16 @@
--- run directly from springboot
-mvn package && java -jar target/spring-boot-1.0-SNAPSHOT.jar
-mvn package && java -jar target/spring-boot-1.0-SNAPSHOT-spring-boot.jar
+* -- run directly from springboot
+```mvn package && java -jar target/spring-boot-1.0-SNAPSHOT.jar```
+```mvn package && java -jar target/spring-boot-1.0-SNAPSHOT-spring-boot.jar```
 
---build docker image with spotify
+* --build docker image with spotify
 mvn install dockerfile:build -Pspotify
 mvn dockerfile:push
 
---run after using spotify profile
+* --run after using spotify profile
 docker run -p 8080:8080 -it wave/spring-boot:1.0-SNAPSHOT
 
 
--- list images
+ -- list images
 docker image ls
 
 -- build with docker command
