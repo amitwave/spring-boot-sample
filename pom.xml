@@ -106,6 +106,26 @@
                         </configuration>
                     </execution>
                 </executions>
+
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -155,14 +175,14 @@
             <build>
                 <plugins>
 
-                    <plugin>
+            <!--        <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
                         <version>0.26.0</version>
 
 
 
-                        <!--  <executions>
+                        &lt;!&ndash;  <executions>
                               <execution>
                                   <id>start</id>
                                   <phase>pre-integration-test</phase>
@@ -178,11 +198,11 @@
                                       <goal>stop</goal>
                                   </goals>
                               </execution>
-                          </executions>-->
+                          </executions>&ndash;&gt;
 
 
                         <configuration>
-                            <!--<dockerHost>http://192.168.65.0:2375</dockerHost>-->
+                            &lt;!&ndash;<dockerHost>http://192.168.65.0:2375</dockerHost>&ndash;&gt;
                             <verbose>true</verbose>
                             <images>
                                 <image>
@@ -193,7 +213,7 @@
                                             <descriptorRef>artifact</descriptorRef>
                                         </assembly>
                                     </build>
-                                    <!--<run>
+                                    &lt;!&ndash;<run>
                                         <ports>
                                             <port>8080:8080</port>
                                         </ports>
@@ -202,15 +222,31 @@
                                             <url>http://localhost:8080/wave/health-check</url>
                                             <time>120000</time>
                                         </wait>
-                                    </run>-->
+                                    </run>&ndash;&gt;
                                 </image>
 
                             </images>
                         </configuration>
                     </plugin>
+-->
 
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                        </configuration>
+                    </plugin>
 
-
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <configuration>
+                            <failOnMissingWebXml>false</failOnMissingWebXml>
+                        </configuration>
+                    </plugin>
 
                 </plugins>
 
