@@ -241,11 +241,11 @@
     <profiles>
         <profile>
             <id>spotify</id>
-            <!--<activation>
-                &lt;!&ndash; this profile is active by default &ndash;&gt;
+            <activation>
+                <!-- this profile is active by default -->
                 <activeByDefault>true</activeByDefault>
 
-            </activation>-->
+            </activation>
             <build>
                 <plugins>
                     <plugin>
