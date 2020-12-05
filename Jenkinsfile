@@ -48,7 +48,7 @@ pipeline {
           stage('Push image') {
                       steps{
                         script {
-                          docker.push dockerImage
+                          docker.push registry + ":$BUILD_NUMBER"
                         }
                       }
           }
