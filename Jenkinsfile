@@ -34,9 +34,15 @@ pipeline {
             steps{
               script {
                 dockerImage = docker.Build registry + ":$BUILD_NUMBER"
-                echo 'Docker image created $dockerImage'
+
               }
             }
+            post {
+                         success {
+                            echo 'Docker image created ' $dockerImage
+                               // junit 'target/surefire-reports/**/*.xml'
+                            }
+                        }
           }
 
           stage('Push image') {
