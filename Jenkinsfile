@@ -63,11 +63,12 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-         // docker.withRegistry( "http://192.168.0.56:5000" ) {
+      //    docker.withRegistry( "http://192.168.0.56:5000" ) {
+          docker.withServer( "tcp://192.168.0.56:5000" ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
 
-        //  }
+          }
         }
       }
     }
