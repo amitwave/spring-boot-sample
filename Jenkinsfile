@@ -5,7 +5,7 @@ pipeline {
         jdk 'JDK_8'
     }
     environment {
-        registry = "192.168.0.56:5000/wave"
+        registry = "http://192.168.0.56:5000/wave"
         //registryCredential = 'dockerhub'
         dockerImage = ''
     }
