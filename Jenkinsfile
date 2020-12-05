@@ -5,8 +5,7 @@ pipeline {
         jdk 'JDK_8'
     }
     environment {
-        //registry = "http://192.168.0.56:5000"
-        registry = "amitwave/test/"
+        registry = "http://192.168.0.56:5000"
         //registryCredential = 'dockerhub'
         dockerImage = ''
     }
@@ -50,7 +49,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build( $registry + "wave-app:${env.BUILD_ID}")
+                dockerImage = docker.build("wave-app:${env.BUILD_ID}")
 
               }
             }
@@ -64,7 +63,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( "https://hub.docker.com/repository/docker/" ) {
+          docker.withRegistry( "http://192.168.0.56:5000" ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
 
