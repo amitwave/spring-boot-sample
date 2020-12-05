@@ -9,6 +9,7 @@ pipeline {
         //registryCredential = 'dockerhub'
         dockerImage = ''
     }
+
     stages {
         stage ('Initialize') {
             steps {
@@ -30,10 +31,25 @@ pipeline {
                 }
             }
         }
+//         stage('Building image') {
+//             steps{
+//               script {
+//                 dockerImage = docker.build registry + ":$BUILD_NUMBER"
+//
+//               }
+//             }
+//             post {
+//                          success {
+//                             echo 'Docker image created ' + "$dockerImage"
+//                                // junit 'target/surefire-reports/**/*.xml'
+//                             }
+//                         }
+//           }
+
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                dockerImage = docker.build("my-image:${env.BUILD_ID}")
 
               }
             }
@@ -44,11 +60,10 @@ pipeline {
                             }
                         }
           }
-
           stage('Push image') {
                       steps{
                         script {
-                          docker.push registry + ":$BUILD_NUMBER"
+                          dockerImage.push()
                         }
                       }
           }
