@@ -7,6 +7,7 @@ pipeline {
     environment {
         registry = "192.168.0.56:5000/wave"
         //registryCredential = 'dockerhub'
+        dockerImage = ''
     }
     stages {
         stage ('Initialize') {
@@ -32,9 +33,26 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                docker.build registry + ":$BUILD_NUMBER"
+                dockerImage = docker.Build registry + ":$BUILD_NUMBER"
+                echo 'Docker image created $dockerImage'
               }
             }
+          }
+
+          stage('Push image') {
+                      steps{
+                        script {
+                          docker.Push dockerImage
+                        }
+                      }
+          }
+
+          stage('Remove Unused docker image') {
+                steps{
+                  sh "docker rmi $dockerImage"
+                   sh "docker rmi $dockerImage:latest"
+
+                }
           }
     }
 }
