@@ -49,7 +49,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build("wave-app:${env.BUILD_ID}")
+                dockerImage = docker.build("amitwave/test/wave-app:${env.BUILD_ID}")
 
               }
             }
