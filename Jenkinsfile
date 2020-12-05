@@ -4,6 +4,10 @@ pipeline {
         maven 'mvn'
         jdk 'JDK_8'
     }
+    environment {
+        registry = "http://192.168.0.56:5000/wave"
+        //registryCredential = 'dockerhub'
+    }
     stages {
         stage ('Initialize') {
             steps {
@@ -24,6 +28,16 @@ pipeline {
                    // junit 'target/surefire-reports/**/*.xml'
                 }
             }
+        }
+
+        stages {
+          stage('Building image') {
+            steps{
+              script {
+                docker.build registry + ":$BUILD_NUMBER"
+              }
+            }
+          }
         }
     }
 }
