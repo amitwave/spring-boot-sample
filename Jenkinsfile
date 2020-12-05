@@ -39,7 +39,7 @@ pipeline {
             }
             post {
                          success {
-                            echo 'Docker image created ' $dockerImage
+                            echo 'Docker image created ' + "$dockerImage"
                                // junit 'target/surefire-reports/**/*.xml'
                             }
                         }
