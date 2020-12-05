@@ -5,7 +5,7 @@ pipeline {
         jdk 'JDK_8'
     }
     environment {
-        registry = "http://192.168.0.56:5000"
+        registry = "amitwave/test"
         //registryCredential = 'dockerhub'
         dockerImage = ''
     }
@@ -63,7 +63,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( "http://192.168.0.56:5000" ) {
+          docker.withRegistry( "https://hub.docker.com/repository/docker/" ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
 
