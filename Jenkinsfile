@@ -49,7 +49,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build("my-image:${env.BUILD_ID}")
+                dockerImage = docker.build("wave-app:${env.BUILD_ID}")
 
               }
             }
@@ -60,13 +60,17 @@ pipeline {
                             }
                         }
           }
-          stage('Push image') {
-                      steps{
-                        script {
-                          dockerImage.push()
-                        }
-                      }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( registry ) {
+            dockerImage.push()
+            dockerImage.push('latest')
+
           }
+        }
+      }
+    }
 
           stage('Remove Unused docker image') {
                 steps{
