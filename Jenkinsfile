@@ -5,8 +5,9 @@ pipeline {
         jdk 'JDK_8'
     }
     environment {
-        registry = "http://192.168.0.56:5000"
-        //registryCredential = 'dockerhub'
+        //registry = "http://192.168.0.56:5000"
+        registry = "https://hub.docker.com/"
+        registryCredential = 'dockerhub'
         dockerImage = ''
     }
 
