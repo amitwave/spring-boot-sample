@@ -45,7 +45,7 @@ pipeline {
             }
             post {
                          success {
-                            echo 'Docker image created ' + ${env.registry} + ":${env.BUILD_ID}"
+                            echo 'Docker image created ' + $registry:${BUILD_ID}
                             }
                         }
           }
