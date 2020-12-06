@@ -45,7 +45,7 @@ pipeline {
             }
             post {
                          success {
-                            echo 'Docker image created ' + $registry:${BUILD_ID}
+                            sh 'echo Docker image created  $registry:${BUILD_ID}'
                             }
                         }
           }
