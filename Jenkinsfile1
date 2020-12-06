@@ -40,7 +40,7 @@ pipeline {
                 //echo 'Docker image name ' + "$dockerImage"
 
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                sh 'docker build -t $registry  .'
+                sh 'docker build -t $registry:${BUILD_ID}  .'
               }
             }
             post {
