@@ -40,7 +40,7 @@ pipeline {
                 //echo 'Docker image name ' + "$dockerImage"
 
                 sh 'echo \"${env.BUILD_ID}\"'
-                sh 'docker build -t $registry${env.BUILD_ID}  .'
+                sh 'docker build -t $registry  .'
               }
             }
             post {
