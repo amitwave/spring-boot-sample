@@ -76,7 +76,7 @@ pipeline {
 
           stage('Remove Unused docker image') {
                 steps{
-                  sh "docker rmi "$registry:${env.BUILD_ID}"
+                  sh "docker rmi $registry:${env.BUILD_ID}"
                   sh "docker rmi $registry:latest"
 
                 }
