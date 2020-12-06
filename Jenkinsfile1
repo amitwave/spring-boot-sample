@@ -38,7 +38,7 @@ pipeline {
                 dockerImage =  ${env.registry} + ":${env.BUILD_ID}"
 
                 //echo 'Docker image name ' + "$dockerImage"
-                sh 'docker build $dockerImage'
+                sh 'docker build ${env.dockerImage}'
               }
             }
             post {
