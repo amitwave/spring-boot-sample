@@ -35,7 +35,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage =  $registry + ":${env.BUILD_ID}"
+                dockerImage =  ${env.registry} + ":${env.BUILD_ID}"
 
                 echo 'Docker image name ' + "$dockerImage"
                 sh 'docker build $dockerImage'
