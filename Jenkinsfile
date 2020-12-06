@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         //registry = "http://192.168.0.56:5000"
-        registry = "https://hub.docker.com/"
+        registry = "amitwave/test"
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
@@ -50,7 +50,8 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build("amitwave/test:${env.BUILD_ID}")
+               // dockerImage = docker.build("amitwave/test:${env.BUILD_ID}")
+                dockerImage = docker.build("$registry:${env.BUILD_ID}")
 
               }
             }
@@ -75,8 +76,8 @@ pipeline {
 
           stage('Remove Unused docker image') {
                 steps{
-                  sh "docker rmi $dockerImage"
-                   sh "docker rmi $dockerImage:latest"
+                  sh "docker rmi "$registry:${env.BUILD_ID}"
+                  sh "docker rmi $registry:latest"
 
                 }
           }
