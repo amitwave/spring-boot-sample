@@ -39,7 +39,7 @@ pipeline {
 
                 //echo 'Docker image name ' + "$dockerImage"
 
-                sh 'echo ${env.BUILD_ID}'
+                echo ${env.BUILD_ID}
                 sh 'docker build -t $registry  .'
               }
             }
