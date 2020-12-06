@@ -52,7 +52,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-        withDockerRegistry([ credentialsId: "registryCredential", url: "" ]) {
+        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
 
         //sh "echo ${registryCredential} | docker login --username ${registryCredential} --password-stdin"
         sh "docker tag $registry:${BUILD_ID} $registry:${BUILD_ID}"
