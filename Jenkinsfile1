@@ -52,12 +52,14 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-        sh "echo ${registryCredential} | docker login --username ${registryCredential} --password-stdin"
+        withDockerRegistry([ credentialsId: "registryCredential", url: "" ]) {
+
+        //sh "echo ${registryCredential} | docker login --username ${registryCredential} --password-stdin"
         sh "docker tag $registry:${BUILD_ID} $registry:${BUILD_ID}"
         sh "docker tag $registry:${BUILD_ID} $registry:latest"
         sh "docker push $registry:${BUILD_ID}"
         sh "docker push $registry:latest"
-
+        }
         }
       }
     }
