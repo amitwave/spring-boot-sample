@@ -16,21 +16,21 @@ stages:
       steps:
         - bash: echo $(Build.BuildNumber)
 
-# - stage: DeployToDev
-#   jobs:
-#     - job: Build Job DeployToDev
-#       steps:
-#         - bash: echo $(Build.BuildNumber)
-# - stage: DeployToQA
-#   jobs:
-#     - job: Build Job DeployToQA
-#       steps:
-#         - bash: echo $(Build.BuildNumber)
-# - stage: DeployToProd
-#   jobs:
-#     - job: Build Job DeployToProd
-#       steps:
-#         - bash: echo $(Build.BuildNumber)
+- stage: DeployToDev
+  jobs:
+    - job: Build_Job_DeployToDev
+      steps:
+        - bash: echo $(Build.BuildNumber)
+- stage: DeployToQA
+  jobs:
+    - job: Build_Job_DeployToQA
+      steps:
+        - bash: echo $(Build.BuildNumber)
+- stage: DeployToProd
+  jobs:
+    - job: Build_Job_DeployToProd
+      steps:
+        - bash: echo $(Build.BuildNumber)
 
 
 
