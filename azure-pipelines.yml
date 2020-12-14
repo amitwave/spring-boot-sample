@@ -11,6 +11,11 @@ pool:
 
 stages:
 - stage: Build
+  jobs:
+    - job: Build Job1
+      steps:
+        - bash echo 'Hello this is Build Job1 Step1'
+
 - stage: DeployToDev
 - stage: DeployToQA
 - stage: DeployToProd
