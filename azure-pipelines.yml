@@ -12,7 +12,7 @@ pool:
 stages:
 - stage: Build
   jobs:
-    - job: Build-Job1
+    - job: Build_Job1
       steps:
         - bash: echo $(Build.BuildNumber)
 
