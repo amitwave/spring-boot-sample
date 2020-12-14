@@ -18,9 +18,11 @@ stages:
 
 - stage: DeployToDev
   jobs:
-    - job: Build_Job_DeployToDev
+    - job: Build_Job_DeployToDev1
       steps:
-        - bash: echo $(Build.BuildNumber)
+        - bash: echo $(Build.BuildNumber)Build_Job_DeployToDev1
+    - job: Build_Job_DeployToDev2
+        - bash: echo $(Build.BuildNumber)Build_Job_DeployToDev2    
 - stage: DeployToQA
   jobs:
     - job: Build_Job_DeployToQA
