@@ -15,7 +15,10 @@ stages:
     - job: Build_Job1
       steps:
         - bash: echo $(Build.BuildNumber)
-
+    - job: Build_Job1
+      steps:
+        - bash: echo $(Build.BuildNumber)
+        
 - stage: DeployToDev
   jobs:
     - job: Build_Job_DeployToDev1
