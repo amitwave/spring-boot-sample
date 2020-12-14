@@ -24,6 +24,13 @@ stages:
     - job: Build_Job_DeployToDev1
       steps:
         - bash: echo $(Build.BuildNumber)
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              # Write your commands here
+              
+              echo 'Hello world'
    
 - stage: DeployToQA
   jobs:
