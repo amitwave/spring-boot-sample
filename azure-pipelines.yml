@@ -54,7 +54,7 @@ stages:
     - job: Build_Job_DeployToProd
       steps:
         - bash: echo $(Build.BuildNumber)
-        - template: 
+
 
 
 
