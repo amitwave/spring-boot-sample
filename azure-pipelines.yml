@@ -12,21 +12,24 @@ pool:
 stages:
 - stage: Build
   jobs:
-    - job: Build_Job1
-      steps:
-        - bash: echo $(Build.BuildNumber)
-    - job: Build_Job2
-      steps:
-        - bash: echo $(Build.BuildNumber)
-        - task: Maven@3
-          inputs:
-            mavenPomFile: 'pom.xml'
-            publishJUnitResults: false
-            javaHomeOption: 'JDKVersion'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+    - template: azurepipelines/templates/build.yml
+  
+
+    # - job: Build_Job1
+    #   steps:
+    #     - bash: echo $(Build.BuildNumber)
+    # - job: Build_Job2
+    #   steps:
+    #     - bash: echo $(Build.BuildNumber)
+    #     - task: Maven@3
+    #       inputs:
+    #         mavenPomFile: 'pom.xml'
+    #         publishJUnitResults: false
+    #         javaHomeOption: 'JDKVersion'
+    #         mavenVersionOption: 'Default'
+    #         mavenAuthenticateFeed: false
+    #         effectivePomSkip: false
+    #         sonarQubeRunAnalysis: false
 
 - stage: DeployToDev
   jobs:
@@ -51,6 +54,8 @@ stages:
     - job: Build_Job_DeployToProd
       steps:
         - bash: echo $(Build.BuildNumber)
+        - template: 
+
 
 
 
