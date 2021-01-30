@@ -54,14 +54,17 @@
 ```minikube service rest-example --url```
 
 jenkins container:
-docker run --name jenkins -p 8080:8080 -p 50000:50000
--v /var/run/docker.sock:/var/run/docker.sock
--v $(which docker):/usr/bin/docker
--v /home/jenkins_home:/var/jenkins_home
+docker run --name jenkins -p 8080:8080 -p 50000:50000 \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v $(which docker):/usr/bin/docker \
+-v /home/jenkins_home:/var/jenkins_home \
 jenkins/jenkins
 
 run the docker for jenkins
 docker run --name jenkinswave -p 8085:8080 -p 50000:50000 -v $(which docker):/usr/bin/docker -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock  jenkins-wave 
 change the permission inside the docker - chmod 777 /var/run/docker.sock
+
+jenkins console at: http://localhost:8085/
+admin/admin
 
 local registry: http://localhost:5000/v2/_catalog
